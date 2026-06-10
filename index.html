@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARPA Technology Global — Software de Gestión para Técnicos de Campo</title>
+<meta name="description" content="ARPA Suite: la plataforma profesional que transforma a técnicos independientes y PyMEs en negocios serios. Cotizaciones, formatos de servicio, historial y facturación desde el celular.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0f2044;
+  --navy2: #1a3a6e;
+  --gold: #c9a84c;
+  --gold2: #e8c96a;
+  --white: #ffffff;
+  --light: #f4f6fb;
+  --muted: #8896b3;
+  --text: #1e2d4a;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(15,32,68,0.97);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--gold); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 9px 22px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-cta:hover { background: var(--gold2); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 32px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(26,58,110,0.8) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 36px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.badge {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  padding: 16px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.hero-btn:hover { background: var(--gold2); transform: translateY(-2px); }
+
+/* App mockup */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.phone-mockup {
+  width: 280px;
+  background: #0a1628;
+  border-radius: 32px;
+  border: 2px solid rgba(201,168,76,0.3);
+  padding: 20px 16px;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+}
+
+.phone-screen {
+  background: var(--navy);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.phone-header {
+  background: #0f2044;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+
+.phone-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.phone-logo-icon {
+  width: 28px; height: 28px;
+  background: var(--gold);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--navy);
+}
+
+.phone-company {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.phone-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.phone-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+}
+
+.phone-body { padding: 12px 14px; }
+
+.phone-section {
+  margin-bottom: 10px;
+}
+
+.phone-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.phone-btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.phone-btn {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px;
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 9px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 500;
+}
+
+.phone-btn.active {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+  font-weight: 700;
+}
+
+.phone-field {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+
+.phone-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  background: #070e1f;
+  padding: 8px 4px;
+  gap: 2px;
+}
+
+.phone-nav-item {
+  text-align: center;
+  font-size: 8px;
+  color: rgba(255,255,255,0.4);
+  padding: 4px 2px;
+}
+
+.phone-nav-item.active { color: var(--gold); }
+
+.phone-nav-dot {
+  width: 16px; height: 16px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  margin: 0 auto 3px;
+}
+
+.phone-nav-item.active .phone-nav-dot { background: rgba(201,168,76,0.3); }
+
+/* ── STATS ── */
+.stats {
+  background: var(--gold);
+  padding: 40px 32px;
+}
+
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(15,32,68,0.7);
+  margin-top: 4px;
+}
+
+/* ── PROBLEMA ── */
+.problem {
+  background: var(--light);
+  padding: 80px 32px;
+}
+
+.problem-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  color: var(--navy);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: #5a6a8a;
+  max-width: 620px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: left;
+}
+
+.pain-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  border-left: 4px solid #e2e8f0;
+}
+
+.pain-card.highlight { border-left-color: var(--gold); }
+
+.pain-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.pain-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.pain-text {
+  font-size: 14px;
+  color: #6b7a99;
+  line-height: 1.6;
+}
+
+/* ── SOLUCIÓN / MÓDULOS ── */
+.solution {
+  background: var(--white);
+  padding: 80px 32px;
+}
+
+.solution-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.solution-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.module-card {
+  background: var(--light);
+  border-radius: var(--radius);
+  padding: 32px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(15,32,68,0.1);
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+
+.module-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.module-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.module-desc {
+  font-size: 14px;
+  color: #5a6a8a;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.module-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.module-features li {
+  font-size: 13px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.module-features li::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ── PARA QUIÉN ── */
+.audience {
+  background: var(--navy);
+  padding: 80px 32px;
+}
+
+.audience-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.audience-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.audience-header .section-title { color: var(--white); }
+.audience-header .section-sub { color: rgba(255,255,255,0.6); }
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.audience-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.audience-card:hover { background: rgba(255,255,255,0.08); }
+
+.audience-icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.audience-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.audience-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+}
+
+/* ── DIFERENCIAL ── */
+.diferencial {
+  background: var(--light);
+  padding: 80px 32px;
+}
+
+.diferencial-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.diff-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  text-align: left;
+  margin-top: 48px;
+}
+
+.diff-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--white);
+  padding: 20px;
+  border-radius: var(--radius);
+}
+
+.diff-icon {
+  width: 40px; height: 40px;
+  min-width: 40px;
+  background: var(--navy);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.diff-text strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.diff-text p {
+  font-size: 13px;
+  color: #6b7a99;
+  line-height: 1.6;
+}
+
+/* ── CTA ── */
+.cta-section {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%);
+  padding: 100px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(36px, 6vw, 60px);
+  font-weight: 800;
+  color: var(--white);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.cta-title em { font-style: normal; color: var(--gold); }
+
+.cta-sub {
+  font-size: 17px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  padding: 18px 44px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+
+.cta-btn:hover { background: var(--gold2); transform: translateY(-3px); }
+
+.cta-note {
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #070e1f;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.footer-logo span { color: var(--gold); }
+
+.footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--gold); }
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+}
+
+/* WhatsApp flotante */
+.wa-float {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 56px; height: 56px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  z-index: 200;
+  transition: transform 0.2s;
+  animation: pulse-wa 2.5s infinite;
+}
+
+.wa-float:hover { transform: scale(1.1); }
+
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+}
+
+.wa-float svg { width: 28px; height: 28px; fill: white; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+
+  .hero { padding: 90px 20px 50px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { order: -1; }
+  .phone-mockup { width: 220px; }
+
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+
+  .pain-grid { grid-template-columns: 1fr; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .audience-grid { grid-template-columns: 1fr; }
+  .diff-list { grid-template-columns: 1fr; }
+
+  .problem, .solution, .audience, .diferencial, .cta-section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ARPA<span>Technology</span></a>
+  <a href="#contacto" class="nav-cta">Solicitar Demo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Software de Gestión para Técnicos de Campo</p>
+      <h1>Tu trabajo merece verse <em>profesional</em></h1>
+      <p class="hero-sub">ARPA Suite convierte a técnicos independientes y empresas de servicio en operaciones serias. Cotizaciones, formatos, historial y facturación — todo desde el celular.</p>
+      <div class="hero-badges">
+        <span class="badge">📱 100% desde el celular</span>
+        <span class="badge">🔒 Tu marca, tu logo</span>
+        <span class="badge">⚡ Sin mensualidades</span>
+      </div>
+      <a href="#contacto" class="hero-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+        Quiero una demostración
+      </a>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-logo-row">
+              <div class="phone-logo-icon">A</div>
+              <span class="phone-company">Tu Empresa</span>
+            </div>
+            <span class="phone-status">ARPA SUITE · ACTIVO</span>
+          </div>
+          <div class="phone-body">
+            <div class="phone-section">
+              <div class="phone-label">Tipo de servicio</div>
+              <div class="phone-btn-row">
+                <div class="phone-btn active">Instalación</div>
+                <div class="phone-btn">Mant.</div>
+                <div class="phone-btn">Reparación</div>
+              </div>
+            </div>
+            <div class="phone-section">
+              <div class="phone-label">Datos del cliente</div>
+              <div class="phone-field">Nombre / Empresa</div>
+              <div class="phone-field">Teléfono</div>
+            </div>
+            <div class="phone-section">
+              <div class="phone-label">Historial del mes</div>
+              <div class="phone-field">12 servicios · $3.480.000</div>
+            </div>
+          </div>
+          <div class="phone-nav">
+            <div class="phone-nav-item active"><div class="phone-nav-dot"></div>Formato</div>
+            <div class="phone-nav-item"><div class="phone-nav-dot"></div>Cotización</div>
+            <div class="phone-nav-item"><div class="phone-nav-dot"></div>Historial</div>
+            <div class="phone-nav-item"><div class="phone-nav-dot"></div>Cobro</div>
+            <div class="phone-nav-item"><div class="phone-nav-dot"></div>Config</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">5</div>
+      <div class="stat-label">Módulos integrados</div>
+    </div>
+    <div>
+      <div class="stat-num">0</div>
+      <div class="stat-label">Mensualidades</div>
+    </div>
+    <div>
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Desde el celular</div>
+    </div>
+    <div>
+      <div class="stat-num">Tu</div>
+      <div class="stat-label">Marca y logo</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problem">
+  <div class="problem-inner">
+    <p class="section-eyebrow">El problema</p>
+    <h2 class="section-title">El técnico que trabaja bien<br>pero no lo <em style="font-style:normal;color:var(--gold)">parece</em></h2>
+    <p class="section-sub">Miles de técnicos y empresas pequeñas hacen un trabajo excelente — pero sin las herramientas correctas, el cliente los ve como informales.</p>
+    <div class="pain-grid">
+      <div class="pain-card highlight">
+        <div class="pain-icon">📋</div>
+        <div class="pain-title">Sin documentación</div>
+        <p class="pain-text">Facturas en papel, cotizaciones por WhatsApp, sin registro de lo que se hizo ni cuánto se cobró.</p>
+      </div>
+      <div class="pain-card highlight">
+        <div class="pain-icon">📊</div>
+        <div class="pain-title">Sin control del negocio</div>
+        <p class="pain-text">No saben cuánto ganaron el mes pasado, qué clientes tienen activos ni cuándo fue el último servicio.</p>
+      </div>
+      <div class="pain-card highlight">
+        <div class="pain-icon">💼</div>
+        <div class="pain-title">Sin imagen profesional</div>
+        <p class="pain-text">El cliente compara con empresas grandes y elige la que se ve más seria — aunque el trabajo sea igual o mejor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUCIÓN -->
+<section class="solution">
+  <div class="solution-inner">
+    <div class="solution-header">
+      <p class="section-eyebrow">La solución</p>
+      <h2 class="section-title">Todo lo que necesitas<br>en un solo lugar</h2>
+      <p class="section-sub">ARPA Suite es la plataforma completa para gestionar tu negocio de servicios técnicos desde el celular.</p>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-num">MÓDULO 01</div>
+        <div class="module-title">Formato de Servicio</div>
+        <p class="module-desc">Genera actas profesionales de instalación, mantenimiento y reparación con fotos, firmas digitales y datos del cliente.</p>
+        <ul class="module-features">
+          <li>Fotos antes y después del trabajo</li>
+          <li>Firma digital del cliente</li>
+          <li>PDF listo para enviar por WhatsApp</li>
+          <li>Numeración automática de documentos</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">MÓDULO 02</div>
+        <div class="module-title">Cotización Profesional</div>
+        <p class="module-desc">Crea cotizaciones detalladas con catálogo de productos y servicios, precios y descuentos en segundos.</p>
+        <ul class="module-features">
+          <li>Catálogo de productos configurable</li>
+          <li>Numeración automática COT-001...</li>
+          <li>PDF con tu marca y logo</li>
+          <li>Envío directo por WhatsApp</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">MÓDULO 03</div>
+        <div class="module-title">Historial de Servicios</div>
+        <p class="module-desc">Registro automático de todos tus servicios. Sabe exactamente cuánto ganaste, qué clientes tienes y qué hiciste.</p>
+        <ul class="module-features">
+          <li>Registro automático por servicio</li>
+          <li>Exportar a Excel con un clic</li>
+          <li>Control de ingresos por período</li>
+          <li>Base de datos de clientes</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">MÓDULO 04</div>
+        <div class="module-title">Cuenta de Cobro</div>
+        <p class="module-desc">Genera cuentas de cobro y documentos de facturación con IVA, retención y datos bancarios incluidos.</p>
+        <ul class="module-features">
+          <li>Cálculo automático de IVA y retención</li>
+          <li>Datos bancarios integrados</li>
+          <li>Numeración CC-001 automática</li>
+          <li>PDF profesional al instante</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUIÉN -->
+<section class="audience">
+  <div class="audience-inner">
+    <div class="audience-header">
+      <p class="section-eyebrow" style="color:var(--gold)">¿Para quién es?</p>
+      <h2 class="section-title">Cualquier técnico.<br>Cualquier servicio.</h2>
+      <p class="section-sub">ARPA Suite no es solo para un gremio — es para cualquier profesional de servicios técnicos que quiera verse y operar como una empresa seria.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-icon">🔌</div>
+        <div class="audience-title">Técnicos Independientes</div>
+        <p class="audience-text">Electricistas, plomeros, refrigeración, automatismos, cerrajeros, telecomunicaciones — cualquier servicio técnico de campo.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🏢</div>
+        <div class="audience-title">Empresas PyME</div>
+        <p class="audience-text">Negocios con 2 a 20 técnicos en campo que necesitan control, documentación y una imagen corporativa consistente.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-icon">🏷️</div>
+        <div class="audience-title">Marca Propia</div>
+        <p class="audience-text">¿Quieres la plataforma con tu nombre y logo? Disponible como solución White Label para empresas que quieren su propio software.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="diferencial">
+  <div class="diferencial-inner">
+    <p class="section-eyebrow">Por qué ARPA Suite</p>
+    <h2 class="section-title">Diseñado por técnicos,<br>para técnicos</h2>
+    <p class="section-sub">No es un software genérico adaptado. Fue construido desde cero para el trabajo de campo real.</p>
+    <div class="diff-list">
+      <div class="diff-item">
+        <div class="diff-icon">📱</div>
+        <div class="diff-text">
+          <strong>Solo necesitas el celular</strong>
+          <p>Sin computador, sin instalaciones, sin configuraciones complicadas. Abre el navegador y listo.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">🔐</div>
+        <div class="diff-text">
+          <strong>Tu marca desde el día uno</strong>
+          <p>Sube tu logo, pon el nombre de tu empresa y tus datos. El cliente nunca sabe qué software usas.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">💳</div>
+        <div class="diff-text">
+          <strong>Pago único, sin sorpresas</strong>
+          <p>Sin suscripciones mensuales. Pagas una vez y la usas para siempre. Sin letras pequeñas.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-icon">⚡</div>
+        <div class="diff-text">
+          <strong>Listo en 5 minutos</strong>
+          <p>Configura tu empresa, sube tu logo y empieza a generar documentos profesionales el mismo día.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner">
+    <h2 class="cta-title">Empieza a verte como la empresa que <em>eres</em></h2>
+    <p class="cta-sub">Solicita una demostración gratuita y descubre cómo ARPA Suite transforma la forma en que operas y te presentas ante tus clientes.</p>
+    <a href="https://wa.me/573005683914?text=Hola,%20quiero%20una%20demo%20de%20ARPA%20Suite" class="cta-btn" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar demostración gratis
+    </a>
+    <p class="cta-note">Sin compromiso · Respuesta en menos de 24 horas</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ARPA<span>Technology</span> Global</div>
+  <p class="footer-tagline">Software profesional para técnicos de campo</p>
+  <div class="footer-links">
+    <a href="#contacto">Contacto</a>
+    <a href="https://wa.me/573005683914" target="_blank">WhatsApp</a>
+  </div>
+  <p class="footer-copy">© 2026 ARPA Technology Global. Todos los derechos reservados.</p>
+</footer>
+
+<!-- WhatsApp flotante -->
+<a href="https://wa.me/573005683914?text=Hola,%20quiero%20información%20sobre%20ARPA%20Suite" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+</body>
+</html>
