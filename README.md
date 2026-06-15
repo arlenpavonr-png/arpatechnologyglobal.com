@@ -6,7 +6,7 @@ Sitio de marketing en GitHub Pages con dominio personalizado (`CNAME`).
 
 | URL pública | Archivo en este repo | Función |
 |-------------|----------------------|---------|
-| **https://arpatechnologyglobal.com/** | **`index.html`** | Landing de marketing (hero, módulos, perfiles, **precios `#precio`**, WhatsApp **573151831998**) |
+| **https://arpatechnologyglobal.com/** | **`index.html`** | Landing de marketing (hero, módulos, perfiles, **precios `#precio`**, WhatsApp **573017419558**) |
 | https://arpatechnologyglobal.com/app/ | `app/index.html` | Redirección a la PWA ARPA Suite en GitHub Pages |
 
 **Nombre exacto del archivo publicado en la raíz del dominio: `index.html`**
