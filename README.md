@@ -20,4 +20,4 @@ No existe `landing.html` en este repositorio. GitHub Pages sirve `index.html` au
 
 ## Despliegue
 
-Push a la rama `main` de este repo. GitHub Pages publica la carpeta raíz en unos minutos.
+Push a la rama `main` de este repo. GitHub Pages publica la carpeta raíz en unos minutos..
