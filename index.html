@@ -576,14 +576,14 @@
 </section>
 
 <!-- SECCIÓN 6: PRECIOS -->
-<section style="background:var(--gray-bg);">
+<section id="precio" style="background:var(--gray-bg);">
   <div class="container fade-in">
     <h2 class="section-title">Una sola inversión. Para siempre.</h2>
     <p class="section-sub">Sin mensualidades. Sin sorpresas.</p>
     <div class="precios-grid">
       <div class="precio-card">
         <h3>Técnico Independiente</h3>
-        <div class="precio-price">$83 <span>USD</span></div>
+        <div class="precio-price" data-usd-price="83">$83 <span>USD</span></div>
         <div class="precio-desc">Para el técnico que trabaja solo</div>
         <ul class="precio-list">
           <li>✅ Todos los documentos ilimitados</li>
@@ -599,7 +599,7 @@
       <div class="precio-card featured">
         <span class="pill pill-gold precio-badge">Más popular</span>
         <h3>PYME</h3>
-        <div class="precio-price">$190 <span>USD</span></div>
+        <div class="precio-price" data-usd-price="190">$190 <span>USD</span></div>
         <div class="precio-desc">Para empresas con varios técnicos</div>
         <ul class="precio-list">
           <li>✅ Todo lo del plan Técnico</li>
@@ -612,7 +612,7 @@
       </div>
       <div class="precio-card">
         <h3>White Label</h3>
-        <div class="precio-price">$333 <span>USD</span></div>
+        <div class="precio-price" data-usd-price="333">$333 <span>USD</span></div>
         <div class="precio-desc">Tu propia marca, tu propia app</div>
         <ul class="precio-list">
           <li>✅ Todo lo del plan PYME</li>
@@ -672,6 +672,85 @@
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     faders.forEach(function (el) { observer.observe(el); });
+  })();
+
+  // ── Detección de país / moneda local (sección #precio) ──
+  (function () {
+    // Tasas fijas USD → moneda local (actualizar a mano cuando haga falta)
+    var USD_TO_MXN = 18.5;  // México
+    var USD_TO_COP = 4100;  // Colombia
+    var USD_TO_PEN = 3.7;   // Perú
+
+    var CURRENCY_BY_COUNTRY = {
+      MX: { code: 'MXN', rate: USD_TO_MXN },
+      CO: { code: 'COP', rate: USD_TO_COP },
+      PE: { code: 'PEN', rate: USD_TO_PEN }
+    };
+
+    var IPAPI_TIMEOUT_MS = 3000;
+
+    function formatAmount(value) {
+      var rounded = Math.round(value * 100) / 100;
+      var isWhole = Math.abs(rounded - Math.round(rounded)) < 0.005;
+      var opts = isWhole
+        ? { maximumFractionDigits: 0 }
+        : { minimumFractionDigits: 0, maximumFractionDigits: 2 };
+      return rounded.toLocaleString('en-US', opts);
+    }
+
+    function applyCurrency(countryCode) {
+      var cfg = CURRENCY_BY_COUNTRY[String(countryCode || '').toUpperCase()];
+      if (!cfg) return; // otros países: dejar USD tal cual en el HTML
+
+      document.querySelectorAll('#precio [data-usd-price]').forEach(function (el) {
+        var usd = parseFloat(el.getAttribute('data-usd-price'));
+        if (!isFinite(usd) || usd <= 0) return;
+        var local = usd * cfg.rate;
+        el.innerHTML = '$' + formatAmount(local) + ' <span>' + cfg.code + '</span>';
+      });
+    }
+
+    function detectCountryFromIp() {
+      var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timer = setTimeout(function () {
+        if (controller) controller.abort();
+      }, IPAPI_TIMEOUT_MS);
+
+      var fetchOpts = controller ? { signal: controller.signal } : {};
+      return fetch('https://ipapi.co/json/', fetchOpts)
+        .then(function (res) {
+          if (!res.ok) throw new Error('ipapi status ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          return (data && data.country_code) ? String(data.country_code).toUpperCase() : 'US';
+        })
+        .catch(function () {
+          return null; // fallback silencioso → USD
+        })
+        .finally(function () {
+          clearTimeout(timer);
+        });
+    }
+
+    function run() {
+      var params = new URLSearchParams(window.location.search);
+      var testCountry = (params.get('test_country') || '').trim().toUpperCase();
+      if (testCountry) {
+        applyCurrency(testCountry);
+        return;
+      }
+
+      detectCountryFromIp().then(function (country) {
+        if (country) applyCurrency(country);
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run);
+    } else {
+      run();
+    }
   })();
 
   // ── (Sección WhatsApp ahora es link directo, sin JS necesario) ──
