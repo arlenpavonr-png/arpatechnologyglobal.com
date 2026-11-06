@@ -594,7 +594,7 @@
           <li>✅ Backup en la nube</li>
           <li>✅ Soporte incluido</li>
         </ul>
-        <a class="btn btn-gold btn-lg" href="https://arpatech.gumroad.com/l/arpa-suite-tecnico">Comprar ahora</a>
+        <a class="btn btn-gold btn-lg" data-plan="Técnico Independiente" href="https://arpatech.gumroad.com/l/arpa-suite-tecnico">Comprar ahora</a>
       </div>
       <div class="precio-card featured">
         <span class="pill pill-gold precio-badge">Más popular</span>
@@ -603,12 +603,12 @@
         <div class="precio-desc">Para empresas con varios técnicos</div>
         <ul class="precio-list">
           <li>✅ Todo lo del plan Técnico</li>
-          <li>✅ Múltiples técnicos</li>
+          <li>✅ Hasta 3 celulares (1 jefe + 2 técnicos)</li>
           <li>✅ Documentos uniformes</li>
           <li>✅ Catálogo compartido</li>
           <li>✅ Historial centralizado</li>
         </ul>
-        <a class="btn btn-gold btn-lg" href="https://arpatech.gumroad.com/l/vdfeuq">Comprar ahora</a>
+        <a class="btn btn-gold btn-lg" data-plan="PYME" href="https://arpatech.gumroad.com/l/vdfeuq">Comprar ahora</a>
       </div>
       <div class="precio-card">
         <h3>White Label</h3>
@@ -620,7 +620,7 @@
           <li>✅ Sin mención de ARPA Suite</li>
           <li>✅ Para distribuidores</li>
         </ul>
-        <a class="btn btn-gold btn-lg" href="https://arpatech.gumroad.com/l/frpjcu">Comprar ahora</a>
+        <a class="btn btn-gold btn-lg" data-plan="White Label" href="https://arpatech.gumroad.com/l/frpjcu">Comprar ahora</a>
       </div>
     </div>
   </div>
@@ -712,6 +712,18 @@
         var local = (cfg.fixed && cfg.fixed[usd]) ? cfg.fixed[usd] : usd * cfg.rate;
         el.innerHTML = '$' + formatAmount(local, cfg.locale) + ' <span>' + cfg.code + '</span>';
       });
+
+      // Colombia paga en pesos por Nequi o transferencia (cualquier banco), no por Gumroad.
+      if (cfg.code === 'COP') {
+        document.querySelectorAll('#precio a[data-plan]').forEach(function (btn) {
+          var plan = btn.getAttribute('data-plan');
+          var msg = 'Hola, quiero comprar ARPA Suite plan ' + plan + '. ¿Me pasas los datos para pagar por Nequi o transferencia?';
+          btn.href = 'https://wa.me/573016092542?text=' + encodeURIComponent(msg);
+          btn.target = '_blank';
+          btn.rel = 'noopener';
+          btn.textContent = 'Pagar por Nequi o transferencia';
+        });
+      }
     }
 
     function detectCountryFromIp() {
