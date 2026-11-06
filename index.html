@@ -684,11 +684,14 @@
     // Colombia tiene precios propios en pesos (decididos por Arlen el 2026-11-06),
     // no la conversión del dólar: { precio en USD del plan: precio fijo en COP }.
     var FIXED_COP_PRICES = { 83: 340000, 190: 779000, 333: 1365000 };
+    // México y Perú: precios fijos sin decimales (Arlen, 2026-11-06).
+    var FIXED_MXN_PRICES = { 83: 1535, 190: 3515, 333: 6160 };
+    var FIXED_PEN_PRICES = { 83: 307, 190: 703, 333: 1232 };
 
     var CURRENCY_BY_COUNTRY = {
-      MX: { code: 'MXN', rate: USD_TO_MXN },
+      MX: { code: 'MXN', rate: USD_TO_MXN, fixed: FIXED_MXN_PRICES },
       CO: { code: 'COP', rate: USD_TO_COP, fixed: FIXED_COP_PRICES, locale: 'es-CO' },
-      PE: { code: 'PEN', rate: USD_TO_PEN }
+      PE: { code: 'PEN', rate: USD_TO_PEN, fixed: FIXED_PEN_PRICES }
     };
 
     var IPAPI_TIMEOUT_MS = 3000;
