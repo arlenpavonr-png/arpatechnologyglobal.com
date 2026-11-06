@@ -681,21 +681,25 @@
     var USD_TO_COP = 4100;  // Colombia
     var USD_TO_PEN = 3.7;   // Perú
 
+    // Colombia tiene precios propios en pesos (decididos por Arlen el 2026-11-06),
+    // no la conversión del dólar: { precio en USD del plan: precio fijo en COP }.
+    var FIXED_COP_PRICES = { 83: 340000, 190: 779000, 333: 1365000 };
+
     var CURRENCY_BY_COUNTRY = {
       MX: { code: 'MXN', rate: USD_TO_MXN },
-      CO: { code: 'COP', rate: USD_TO_COP },
+      CO: { code: 'COP', rate: USD_TO_COP, fixed: FIXED_COP_PRICES, locale: 'es-CO' },
       PE: { code: 'PEN', rate: USD_TO_PEN }
     };
 
     var IPAPI_TIMEOUT_MS = 3000;
 
-    function formatAmount(value) {
+    function formatAmount(value, locale) {
       var rounded = Math.round(value * 100) / 100;
       var isWhole = Math.abs(rounded - Math.round(rounded)) < 0.005;
       var opts = isWhole
         ? { maximumFractionDigits: 0 }
         : { minimumFractionDigits: 0, maximumFractionDigits: 2 };
-      return rounded.toLocaleString('en-US', opts);
+      return rounded.toLocaleString(locale || 'en-US', opts);
     }
 
     function applyCurrency(countryCode) {
@@ -705,8 +709,8 @@
       document.querySelectorAll('#precio [data-usd-price]').forEach(function (el) {
         var usd = parseFloat(el.getAttribute('data-usd-price'));
         if (!isFinite(usd) || usd <= 0) return;
-        var local = usd * cfg.rate;
-        el.innerHTML = '$' + formatAmount(local) + ' <span>' + cfg.code + '</span>';
+        var local = (cfg.fixed && cfg.fixed[usd]) ? cfg.fixed[usd] : usd * cfg.rate;
+        el.innerHTML = '$' + formatAmount(local, cfg.locale) + ' <span>' + cfg.code + '</span>';
       });
     }
 
